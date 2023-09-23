@@ -127,11 +127,14 @@ function move() {
 function createFood() {
     const createFoodX = Math.floor(Math.random() * 21) * box;
     const createFoodY = Math.floor(Math.random() * 21) * box;
-    if (isFood === false && createFoodX !== zmeika[0].x && createFoodY !== zmeika[0].y) {
+    if (isFood === false && isFoodCanSpawn(createFoodX, createFoodY) === true) {
       foodX = createFoodX;
       foodY = createFoodY;
       main.fillRect(foodX, foodY, box, box);
       isFood = true;
+    }
+    else if (isFood === false && isFoodCanSpawn(createFoodX, createFoodY) === false) {
+        createFood();
     }
 }
 
@@ -185,6 +188,16 @@ function isTouchedSelf() {
     for (let i = 1; i < zmeika.length; i++) {
         if (zmeika[0].x === zmeika[i].x && zmeika[0].y === zmeika[i].y) {
             res = true;
+        }
+    }
+    return res;
+}
+
+function isFoodCanSpawn(createFoodX, createFoodY) {
+    let res = true;
+    for (let i = 0; i < zmeika.length; i++) {
+        if (createFoodX === zmeika[i].x && createFoodY === zmeika[i].y) {
+            res = false;
         }
     }
     return res;
