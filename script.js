@@ -3,7 +3,6 @@ const main = canvas.getContext("2d");
 
 const scores = document.querySelectorAll(".score");
 let currentScore = 0;
-let bestScore = 0;
 let zmeika = [
     {
         x: 250,
@@ -55,8 +54,8 @@ function game() {
     move();
     gameOver();
 }
-scores[0].textContent = `Score: ${currentScore}   Best Score: ${bestScore}`;
-scores[1].textContent = `Score: ${currentScore}   Best Score: ${bestScore}`;
+scores[0].textContent = `Score: ${currentScore}   Best Score: ${localStorage.bestScore}`;
+scores[1].textContent = `Score: ${currentScore}   Best Score: ${localStorage.bestScore}`;
 
 function gameOver() {
     if (zmeika[0].x < 0 || zmeika[0].x > 500 || zmeika[0].y < 0 || zmeika[0].y > 500 || isTouchedSelf() === true) {
@@ -75,7 +74,7 @@ function gameOver() {
         startPosition();
         overlay.classList.remove("hide");
         currentScore = 0;
-        scores[0].textContent = `Score: ${currentScore}   Best Score: ${bestScore}`;
+        scores[0].textContent = `Score: ${currentScore}   Best Score: ${localStorage.bestScore}`;
     }
 }
 
@@ -141,12 +140,12 @@ function createFood() {
 function isEat() {
     if (zmeika[0].x === foodX && zmeika[0].y === foodY) {
         currentScore++;
-        if (currentScore > bestScore) {
-            bestScore = currentScore;
+        if (currentScore > localStorage.bestScore) {
+            localStorage.bestScore = currentScore;
         }
         isFood = false;
         for (const score of scores) {
-            score.textContent = `Score: ${currentScore}   Best Score: ${bestScore}`;
+            score.textContent = `Score: ${currentScore}   Best Score: ${localStorage.bestScore}`;
         } 
         addNewElementZmeika();
     }
