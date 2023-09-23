@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <script defer src="./script.js"></script>
+    <script defer src="./modal.js"></script>
+</head>
+<body>
+    <canvas width="525px" height="525px" id="canvas"></canvas>
+    <p class="score">Score: 0</p>
+    <button id="on">Start!</button>
+
+    <div class="overlay hide">
+        <div class="modal_game-over">
+            <h1>Game Over!</h1>
+            <p class="score"></p>
+            <button data-btn>Ok</button>
+        </div>
+    </div>
+</body>
+</html>

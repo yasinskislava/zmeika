@@ -1,0 +1,80 @@
+#canvas {
+    outline: 1px black solid;
+    display: block;
+    margin: auto;
+    border-radius: 4px;
+}
+.score {
+    text-align: center;
+}
+#on {
+    display: block;
+    margin: auto;
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    border: transparent;
+    background-color: rgb(70, 208, 107);
+    color: white;
+    
+}
+#on:hover {
+    background-color: rgb(50, 159, 79);
+    cursor: pointer;
+}
+body {
+    position: relative;
+}
+.modal_game-over {
+    position: fixed;
+    z-index: 2;
+    left: 37%;
+    top: 25%;
+    background-color: rgb(255, 255, 255);
+    width: 400px;
+    height: 150px;
+    border-radius: 25px;
+    padding-top: 5px;
+    box-shadow: 0px 5px 5px 2px rgb(144, 137, 137);
+    animation: 0.5s linear 1 rotating;
+}
+@keyframes rotating {
+    0% {
+        transform: rotate(90deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.overlay {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(140, 135, 135, 0);
+}
+
+.modal_game-over h1 {
+    text-align: center;
+}
+
+.modal_game-over button {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    background-color: rgb(70, 208, 107);
+    border: transparent;
+    color: rgb(255, 255, 255);
+    width: 80px;
+    height: 25px;
+    border-radius: 6px;
+}
+.modal_game-over button:hover {
+    background-color: rgb(50, 159, 79);
+    cursor: pointer;
+}
+.hide {
+    display: none;
+}
