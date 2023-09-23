@@ -3,6 +3,9 @@ const main = canvas.getContext("2d");
 
 const scores = document.querySelectorAll(".score");
 let currentScore = 0;
+if (localStorage.bestScore === undefined) {
+    localStorage.bestScore = 0;
+}
 let zmeika = [
     {
         x: 250,
