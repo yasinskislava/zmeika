@@ -204,7 +204,7 @@ function isFoodCanSpawn(createFoodX, createFoodY) {
     return res;
 }
 function isGameFinished() {
-    if (zmeika.length === 9) {
+    if (zmeika.length === 441) {
         isGameOn = false;
         isFood = false;
         clearInterval(start);
