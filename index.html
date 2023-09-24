@@ -14,11 +14,18 @@
     <button id="on">Start!</button>
 
     <div class="overlay hide">
-        <div class="modal_game-over">
+        <div class="modal_result">
             <h1>Game Over!</h1>
             <p class="score"></p>
-            <button data-btn>Ok</button>
+            <button data-btn="Lose">Ok</button>
         </div>
     </div>
+    <div class="overlay-2 hide">
+        <div class="modal_result" id="modal-fix">
+            <h1>You Won!</h1>
+            <button data-btn="Won" id="fixing">Ok</button>
+        </div>
+    </div>
+
 </body>
 </html>

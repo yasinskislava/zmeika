@@ -52,6 +52,7 @@ function game() {
     dir(key);
     createFood();
     isEat();
+    isGameFinished();
     move();
     gameOver();
 }
@@ -201,4 +202,25 @@ function isFoodCanSpawn(createFoodX, createFoodY) {
         }
     }
     return res;
+}
+function isGameFinished() {
+    if (zmeika.length === 9) {
+        isGameOn = false;
+        isFood = false;
+        clearInterval(start);
+        for (let i = 0; i <= 525; i += 25) {
+          for (let j = 0; j <= 525; j += 25) {
+            main.clearRect(i, j, box, box);
+          }
+        }
+        zmeika = [
+          {
+            x: 250,
+            y: 250,
+          },
+        ];
+        startPosition();
+        overlay2.classList.remove("hide");
+        currentScore = 0;
+    }
 }
