@@ -140,11 +140,13 @@ function move() {
         }
         changeCoordinates(zmeika[i]);
         gameOver();
-        
+
+        zmeika[i].previousDirection = zmeika[i].mainDirection;
         if (i !== 0) {
             zmeika[i].mainDirection = directionMatrix[zmeika[i].x / box][zmeika[i].y / box];
         }
-        let snakeImg;
+
+        let snakeImg = mushroom;
         if (i === 0) {
             if (zmeika[i].mainDirection === "Up") {
                 snakeImg = snakeHeadUp;
@@ -160,14 +162,27 @@ function move() {
             }
         }
         else if (i > 0 && i < zmeika.length - 1) {
-            if (zmeika[i].mainDirection === "Up" || zmeika[i].mainDirection === "Down") {
+            if (zmeika[i].mainDirection === "Up" && zmeika[i].previousDirection === "Up" || zmeika[i].mainDirection === "Down" && zmeika[i].previousDirection === "Down") {
                 snakeImg = snakePartVertical;
             }
-            else if (zmeika[i].mainDirection === "Right" || zmeika[i].mainDirection === "Left") {
+            else if (zmeika[i].mainDirection === "Right" && zmeika[i].previousDirection === "Right" || zmeika[i].mainDirection === "Left" && zmeika[i].previousDirection === "Left") {
                 snakeImg = snakePartHorizontal;
-            } 
+            }
+                
                 
             
+            else if (zmeika[i].mainDirection === "Right" && zmeika[i].previousDirection === "Up" || zmeika[i].mainDirection === "Down" && zmeika[i].previousDirection === "Left") {
+                snakeImg = snakeDownRight;
+            }
+            else if (zmeika[i].mainDirection === "Left" && zmeika[i].previousDirection === "Up" || zmeika[i].mainDirection === "Down" && zmeika[i].previousDirection === "Right") {
+                snakeImg = snakeDownLeft;
+            }
+            else if (zmeika[i].mainDirection === "Up" && zmeika[i].previousDirection === "Right" || zmeika[i].mainDirection === "Left" && zmeika[i].previousDirection === "Down") {
+                snakeImg = snakeUpLeft;
+            }
+            else if (zmeika[i].mainDirection === "Up" && zmeika[i].previousDirection === "Left" || zmeika[i].mainDirection === "Right" && zmeika[i].previousDirection === "Down") {
+                snakeImg = snakeUpRight;
+            }
             // console.log(zmeika[i].mainDirection);
             // console.log(zmeika[i - 1].mainDirection);
             // console.log(snakeImg);
@@ -189,6 +204,7 @@ function move() {
                 snakeImg = snakeTailLeft;
             }  
         }
+        console.log(snakeImg);
         main.drawImage(snakeImg, zmeika[i].x, zmeika[i].y, box, box);
         
         
