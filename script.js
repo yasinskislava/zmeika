@@ -8,7 +8,15 @@ let zmeika = [
     {
         x: 250,
         y: 250,
-    }
+    },
+    {
+        x: 225,
+        y: 250,
+    },
+    {
+        x: 200,
+        y: 250,
+    },
 ];
 
 let directionMatrix = [];
@@ -69,10 +77,20 @@ function gameOver() {
                 main.clearRect(i, j, box, box);
             }
         }
-        zmeika = [{
+        zmeika = [
+          {
             x: 250,
             y: 250,
-        }];
+          },
+          {
+            x: 225,
+            y: 250,
+          },
+          {
+            x: 200,
+            y: 250,
+          },
+        ];
         startPosition();
         overlay.classList.remove("hide");
         currentScore = 0;
@@ -82,14 +100,21 @@ function gameOver() {
 
 function startGame() {
     if (isGameOn === false) {
-        zmeika[0].mainDirection = "Right";
+        for (const part of zmeika) {
+            part.mainDirection = "Right";
+        }
+        directionMatrix[zmeika[0].x / box][zmeika[0].y / box] = "Right";
+        directionMatrix[zmeika[1].x / box][zmeika[1].y / box] = "Right";
+        directionMatrix[zmeika[2].x / box][zmeika[2].y / box] = "Right";
         isGameOn = true;
         start = setInterval(game, 150);
     }
 }
 
 function startPosition() {
-    main.fillRect(zmeika[0].x, zmeika[0].y, box, box);
+    main.drawImage(snakeHeadRight, zmeika[0].x, zmeika[0].y, box, box);
+    main.drawImage(snakePartHorizontal, zmeika[1].x, zmeika[1].y, box, box);
+    main.drawImage(snakeTailRight, zmeika[2].x, zmeika[2].y, box, box);
 }
 
 function changeCoordinates(part) {
@@ -119,7 +144,54 @@ function move() {
         if (i !== 0) {
             zmeika[i].mainDirection = directionMatrix[zmeika[i].x / box][zmeika[i].y / box];
         }
-        main.fillRect(zmeika[i].x, zmeika[i].y, box, box);
+        let snakeImg;
+        if (i === 0) {
+            if (zmeika[i].mainDirection === "Up") {
+                snakeImg = snakeHeadUp;
+            }
+            else if (zmeika[i].mainDirection === "Down") {
+                snakeImg = snakeHeadDown;
+            }
+            else if (zmeika[i].mainDirection === "Right") {
+                snakeImg = snakeHeadRight;
+            }
+            else if (zmeika[i].mainDirection === "Left") {
+                snakeImg = snakeHeadLeft;
+            }
+        }
+        else if (i > 0 && i < zmeika.length - 1) {
+            if (zmeika[i].mainDirection === "Up" || zmeika[i].mainDirection === "Down") {
+                snakeImg = snakePartVertical;
+            }
+            else if (zmeika[i].mainDirection === "Right" || zmeika[i].mainDirection === "Left") {
+                snakeImg = snakePartHorizontal;
+            } 
+                
+            
+            // console.log(zmeika[i].mainDirection);
+            // console.log(zmeika[i - 1].mainDirection);
+            // console.log(snakeImg);
+            // console.log(zmeika.length);
+            // console.table(directionMatrix);
+            // console.log("-----------------------------");
+        }
+        else if (i === zmeika.length - 1) {
+            if (zmeika[i].mainDirection === "Up") {
+                snakeImg = snakeTailUp;
+            }
+            else if (zmeika[i].mainDirection === "Down") {
+                snakeImg = snakeTailDown;
+            }
+            else if (zmeika[i].mainDirection === "Right") {
+                snakeImg = snakeTailRight;
+            }
+            else if (zmeika[i].mainDirection === "Left") {
+                snakeImg = snakeTailLeft;
+            }  
+        }
+        main.drawImage(snakeImg, zmeika[i].x, zmeika[i].y, box, box);
+        
+        
         // console.log(zmeika[i].x, zmeika[i].y, i, zmeika[i].mainDirection);
     }
     // console.log("-----------------------------");
@@ -131,7 +203,8 @@ function createFood() {
     if (isFood === false && isFoodCanSpawn(createFoodX, createFoodY) === true) {
       foodX = createFoodX;
       foodY = createFoodY;
-      main.fillRect(foodX, foodY, box, box);
+        // main.fillRect(foodX, foodY, box, box);
+        main.drawImage(mushroom, foodX, foodY, box, box);
       isFood = true;
     }
     else if (isFood === false && isFoodCanSpawn(createFoodX, createFoodY) === false) {
